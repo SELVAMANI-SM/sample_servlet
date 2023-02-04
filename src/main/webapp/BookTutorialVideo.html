@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Book Tutorial Video</title>
+</head>
+<body>
+<form onsubmit="booklink()">
+<div>
+<input type="number" id="bookvideo" name="bookvideo" placeHolder="Enter Book Id" required Autofocus>
+<button type="submit">Serach Book Video  Link</button>
+</div>
+<div >
+<table border="1" >
+<thead >
+<tr>
+</tr>
+</thead>
+<tbody id="display">
+</tbody>
+</table>
+</div>
+</form>
+<script>
+function booklink()
+{
+	event.preventDefault();
+
+	let bookLink=document.querySelector("#bookvideo").value;
+	const url="http://localhost:8080/Web_libraryApp/BookTutorialVideoLink?bookLink="+bookLink;
+	fetch(url).then(res=>res.json()).then(res=>{
+		let value =res;
+		
+
+		 let displays=document.querySelector("#display");
+		 let display="<th> Book Tutorial Link </th>";
+		display=display+`<tr><td><a href="${value}">Link</a></td></tr>`;
+		displays.innerHTML=display;
+	});
+}
+
+</script>
+</body>
+</html>

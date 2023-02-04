@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Display IndianExpress NewsPaper</title>
+</head>
+<body>
+<form onsubmit="Hindupaper()">
+<div>
+
+<button type="submit">Hindu NewsPaper</button>
+</div>
+<div >
+<table border="1" >
+<thead >
+<tr>
+
+
+
+</tr>
+</thead>
+<tbody id="display">
+</tbody>
+</table>
+</div>
+</form>
+<script>
+function Hindupaper()
+{
+	 event.preventDefault();
+	 const url="http://localhost:8080/Web_libraryApp/NewsPaperIndianExpress";
+	 fetch(url).then(res=>res.json()).then(res=>{
+		 let value=res;
+			
+		let displays=document.querySelector("#display");
+		let display="<th>E-Indian Express Link</th>";
+		display=display+`<tr><td><a href="${value}">${value}</a></td></tr>`;
+		displays.innerHTML=display;
+});
+}
+</script>
+</body>
+</html>

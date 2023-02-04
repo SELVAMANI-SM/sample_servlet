@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Register Membership</title>
+
+</head>
+<body>
+
+<form onsubmit="member()" id="registerForm">
+<div>
+<label for="membername">MemberName: </label>
+<input type="text" id="membername"name="membername"
+placeHolder="Enter Your Name" required Autofocus><span id="nameinvalid"></span>
+</div>
+<div>
+<label for="membergmail">MemberGmail: </label>
+<input type="email" id="membergmail"name="membergmail"
+placeHolder="Enter Your Gmail" required Autofocus><span id="emailinvalid"></span>
+</div>
+<div>
+
+<label for="memberpassword">MemberPassword: </label>
+<input type="text" id="memberpassword"name="memberpassword"
+placeHolder="Enter Your Password" required Autofocus><span id="passwordinvalid"></span>
+</div>
+<div>
+<label for="membermobile">MemberMobile: </label>
+
+<input type="number" id="membermobile"name="membermobile"
+placeHolder="Enter Your mobile" required><span id="mobileinvalid"></span>
+</div>
+<button type="submit">Submit</button>
+
+</form>
+<script>
+function member()
+{
+	event.preventDefault();
+
+    let name= document.querySelector("#membername").value;
+    let email= document.querySelector("#membergmail").value;
+    let password= document.querySelector("#memberpassword").value;
+    let mobile= document.querySelector("#membermobile").value;
+  
+    var count=0;
+ 
+        if(name==null||name.trim()=="")
+        {
+        	nameinvalid.innerHTML="invalid";
+        }
+        else{
+            count++;
+        }
+
+        if( !email.includes("@")&& !email.includes("."))
+        {
+        	emailinvalid.innerHTML="invalid";
+        }
+        else{
+            count++;
+        }
+        if(password.length<8|password.length>16)
+        {
+        	passwordinvalid.innerHTML="invalid";
+        }
+        else{
+            count++;
+        }
+        if(mobile.length<=9|| mobile.length>=11) 
+        {
+        	mobileinvalid.innerHTML="invalid";
+        }
+        else{
+            count++;
+        }
+     
+    	//alert(count);
+        if(count!=4)
+        	{
+        	 let form=document.querySelector("#registerForm");
+     		form.reset();
+        	}
+          
+       
+     
+		
+    if(count==4)
+    {
+    	var count1=0;
+       const url="http://localhost:8080/Web_libraryApp/RegisterMembership?name="+name+"&email="+email+"&password="+password+"&mobile="+mobile;
+       fetch(url).then(res=>res.json()).then(res=>{
+    	   let value=res;
+    	    alert(value);
+            if(value=="Success")
+       	    {
+      		alert("Hi "+name+"your id ");
+      		}
+           let form=document.querySelector("#registerForm");
+    		form.reset();
+             });
+     }
+}
+</script>
+</body>
+</html>

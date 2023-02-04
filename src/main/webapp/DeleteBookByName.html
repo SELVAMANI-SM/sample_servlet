@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Delete Book By Name</title>
+</head>
+<body>
+<form onsubmit="DeletebookName()">
+<div>
+<input type="text" id="deletebook"name="deletebook" placeHolder="Enter Book Name" required autofocus><span id="invalidname"></span>
+
+</div>
+<button type="submit" >Delete</button>
+</form>
+<script>
+function DeletebookName()
+{
+	event.preventDefault();
+	let deleteBookName=document.querySelector("#deletebook").value;
+	var count=0;
+	if(deleteBookName==null||deleteBookName.trim()=="")
+		{
+		invalidname.innerHTML="Invaild"
+		}
+	else
+		{
+		count++;
+		}
+	if(count==1)
+		{
+		const url="http://localhost:8080/Web_libraryApp/DeleteByBookName?deleteBookName="+deleteBookName;
+		fetch(url).then(res=>res.json()).then(res=>{
+			let value=res;
+			alert(value);
+			
+			
+		});
+		}
+	}
+</script>
+
+</body>
+</html>

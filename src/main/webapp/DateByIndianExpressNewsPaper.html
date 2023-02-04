@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Date By IndianExpress NewsPaper</title>
+</head>
+<body onsubmit="indianNews()">
+<form>
+<div>
+<input type="date" id="newsindian"name="newsindian" placeHOlder="Enter Date" required Autofocus><span id="invaildindian"></span>
+<button type="submit">Serach IndianExpress </button> 
+</div>
+<div >
+<table border="1" >
+<thead >
+<tr>
+</tr>
+</thead>
+<tbody id="display">
+</tbody>
+</table>
+</div>
+</form>
+<script>
+function indianNews()
+{
+	event.preventDefault();
+	let indianNewsPaper=document.querySelector("#newsindian").value;
+	var count=0;
+	if(indianNewsPaper==null||indianNewsPaper.trim()=="")
+		{
+		invaildindian.innerHTML="Invalid";
+		}
+	else
+		{
+		count++;
+		}
+	if(count==1)
+		{
+		const url="http://localhost:8080/Web_libraryApp/DateByIndianExpress?indianNewsPaper="+indianNewsPaper;
+		 fetch(url).then(res=>res.json()).then(res=>{
+			 let value=res;
+				
+			 let displays=document.querySelector("#display");
+			 let display="<th>E-IndianExpress Link</th>";
+			display=display+`<tr><td>${value}</td></tr>`;
+			displays.innerHTML=display;
+		 });
+		}
+	}
+</script>
+</body>
+</html>

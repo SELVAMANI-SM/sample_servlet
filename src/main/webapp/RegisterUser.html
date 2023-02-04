@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Register User</title>
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<div class="container">
+		<div class="title">Registration</div>
+		<div class="content">
+			<form onsubmit="user()">
+				<div class="user-details">
+					<div class="input-box">
+						<span class="details"></span> <label for="username">UserName:</label>
+						<input type="text" name="username" id="username"
+							Placeholder="Enter Your Name" required autofocus><span
+							id="nameinvalid"></span>
+					</div>
+					<div class="input-box">
+						<span class="details"></span> <label for="useremail">UserEmail:</label>
+						<input type="email" name="useremail" id="useremail"
+							placeholder="Enter Your Email" required><span
+							id="emailinvalid"></span>
+					</div>
+					<div class="input-box">
+						<span class="details"></span> <label for="userpassword">UserPassword</label>
+						<input type="password" name="userpassword" id="userpassword"
+							placeholder="Enter Your Password" required><span
+							id="passwordinvalid"></span>
+					</div>
+					<div class="input-box">
+						<span class="details"></span> <label for="usermobile">UserMobileNumber
+						</label> <input type="number" name="usermobile" id="usermobile"
+							min="0000000000" max="9999999999"
+							placeholder="Enter your mobile number" required><span
+							id="mobileinvalid"></span>
+					
+
+					<div class="button">
+						<button type="submit" value="Register" class="button-34" role="button">Submit</button>
+						
+
+					</div>
+				</div>
+				</form>
+		</div>
+	</div>
+	</div>
+	
+
+<script>
+function user()
+{
+	event.preventDefault();
+
+    let name= document.querySelector("#username").value;
+    let email= document.querySelector("#useremail").value;
+    let password= document.querySelector("#userpassword").value;
+    let mobile= document.querySelector("#usermobile").value;
+  
+    var count=0;
+ 
+        if(name==null||name.trim()=="")
+        {
+        	nameinvalid.innerHTML="invalid";
+        }
+        else{
+            count++;
+        }
+
+        if( !email.includes("@")&& !email.includes("."))
+        {
+        	emailinvalid.innerHTML="invalid";
+        }
+        else{
+            count++;
+        }
+        if(password.length<8|password.length>16)
+        {
+        	passwordinvalid.innerHTML="invalid";
+        }
+        else{
+            count++;
+        }
+        if(mobile.length<=9|| mobile.length>=11) 
+        {
+        	mobileinvalid.innerHTML="invalid";
+        }
+        else{
+            count++;
+        }
+        alert(count);
+        if(count!=4)
+        	{
+        	let form=document.querySelector("#registerForm");
+      		form.reset();
+        	}
+       
+     
+		
+    if(count==4)
+    {
+    	
+       const url="http://localhost:8080/Web_libraryApp/RegisterUser?name="+name+"&email="+email+"&password="+password+"&mobile="+mobile;
+       fetch(url).then(res=>res.json()).then(res=>{
+    	   let value=res;
+    	    alert(value);
+     if(value=="Success")
+       	{
+      		alert("Hi "+name+"your id");
+      
+      		
+       	}
+     let form=document.querySelector("#registerForm");
+		form.reset();
+    	  });
+     }
+}
+
+    
+
+
+
+
+</script>
+	
+</body>
+</html>

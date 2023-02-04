@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>E-Book Link</title>
+</head>
+<body>
+<form onsubmit="bookslink()">
+<div>
+<input type="number" id="booklink" name="booklink" placeHolder="Enter Book Id" required Autofocus>
+<button type="submit">Serach Book Link</button>
+</div>
+<div >
+<table border="1" >
+<thead >
+<tr>
+</tr>
+</thead>
+<tbody id="display">
+</tbody>
+</table>
+</div>
+</form>
+<script>
+function bookslink()
+{
+	event.preventDefault();
+
+	let bookIdLink=document.querySelector("#booklink").value;
+	const url="http://localhost:8080/Web_libraryApp/EBookReferenceLink?bookIdLink="+bookIdLink;
+	fetch(url).then(res=>res.json()).then(res=>{
+		let value =res;
+		
+
+		 let displays=document.querySelector("#display");
+		 let display="<th> E-Book Link </th>";
+		 display=display+`<tr><td><a href="${value}">Link</a></td></tr>`;
+		displays.innerHTML=display;
+	});
+}
+
+</script>
+</body>
+</html>

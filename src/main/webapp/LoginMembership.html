@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Login Membership</title>
+</head>
+<body>
+<form onsubmit="membershiplogin()">
+<div>
+<label for="memberlogin">Enter Email</label>
+<input type="text"id="memberlogin"name="memberlogin" placeHolder="Enter your Gmail | Your Id " required autofocus>
+
+</div>
+<div>
+<label for="memberpassword">Enter Password</label>
+<input type="text" id="memberpassword"name="memberpassword" placeHolder="Enter your Password" required>
+</div>
+<button type="submit">Submit</button>
+</form>
+<script>
+function membershiplogin()
+{
+	event.preventDefault();
+	let gmail=document.querySelector("#memberlogin").value;
+	let password=document.querySelector("#memberpassword").value;
+	const url="http://localhost:8080/Web_libraryApp/LoginMembership?gmail="+gmail+"&password="+password;
+	fetch(url).then(res=>res.json()).then(res=>{
+		let value=res;
+		//alert(value);
+		console.log(res);
+		 if(res.includes("First You Register"))
+			{
+			 alert(res);
+		
+			window.location.href="RegisterMembership.html";
+			}
+		else if (res.includes("invalid credentials")){
+			alert(res);
+			window.location.href="LoginMembership.html";
+		}
+		else
+			{
+			
+			alert("Logged In");
+			localStorage.setItem('MEMBER_ID',gmail);
+			window.location.href="NextPage.html";
+			
+			}
+			
+	});
+}
+</script>
+</body>
+</html>

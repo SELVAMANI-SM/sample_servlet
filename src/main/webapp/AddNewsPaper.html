@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Add News Paper</title>
+</head>
+<body>
+<form onsubmit="addNews()">
+<div>
+<input type="text" id="dinamalarnews"name="dinamalarnews" placeHolder="Enter E-Dinamalar NewsPaper"required autofocus><span id="dinamalar"></span>
+</div>
+<div>
+<input type="text" id="hindunews"name="hindunews" placeHolder="Enter E-Hindu NewsPaper"required ><span id="hindu"></span>
+</div>
+<div>
+<input type="text" id="indianexpress"name="indianexpress" placeHolder="Enter E-Indian Expres NewsPaper"required><span id="indian"></span>
+</div>
+<button type="submit">Submit</button>
+</form>
+<script>
+function addNews()
+{
+	event.preventDefault();
+	let dinamalarNews=document.querySelector("#dinamalarnews").value;
+	let hinduNews=document.querySelector("#hindunews").value;
+	let indianExpressNews=document.querySelector("#indianexpress").value;
+	var count=0;
+	if(dinamalarNews==null||dinamalarNews.trim()=="")
+		{
+		invaliddinamalar.innerHtML="Invaild";
+		}
+	else
+		{
+		count++;
+		}
+	if(hinduNews==null||hinduNews.trim()=="")
+		{
+		invalidhindu.innerHTML="Invalid";
+		}
+	else
+		{
+		count++;
+		}
+	if(indianExpressNews==null||indianExpressNews.trim()=="")
+		{
+		invalidindian.innerHTML="Invalid";
+		}
+	else
+		{
+		count++;
+		}
+	alert(count);
+	
+	if(count=3)
+		{
+		const url="http://localhost:8080/Web_libraryApp/AddNewsPaper?dinamalarNews="+dinamalarNews+"&hinduNews="+hinduNews+"&indianExpressNews="+indianExpressNews;
+		fetch(url).then(res=>res.json()).then(res=>{
+			let value=res;
+			alert(value);
+			});
+		}
+
+	}
+</script>
+</body>
+</html>

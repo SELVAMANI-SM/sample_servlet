@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Serach By Book Dept</title>
+</head>
+<body>
+<form onsubmit="Bookdept()">
+<div>
+<input type="text" id="dept"name="dept" placeHolder="Enter Dept " required autofocus><span id="invaliddept"></span>
+<button type="submit">Search</button>
+</div>
+
+<div>
+<table border="1">
+<thead>
+<tr></tr>
+</thead>
+<tbody id="display">
+</tbody>
+</table>
+</div>
+</form>
+<script>
+function Bookdept()
+{
+	event.preventDefault();
+	let dept=document.querySelector("#dept").value;
+	var count=0;
+	if(dept==null||dept.trim()=="")
+	{
+		invaliddept.innerHTML="Invalid";
+	}
+	else
+	{
+		count++;
+	}
+	alert(count);
+	if(count==1)
+	{
+		const url="http://localhost:8080/Web_libraryApp/SerachByBookDept?dept="+dept;
+		fetch(url).then(res=>res.json()).then(res=>{
+let value=res;
+			
+			let displays=document.querySelector("#display");
+		
+			let display="<th>Books Id</th><th>Books Name</th><th>Books Deptpartment</th><th>Books Status</th>";
+			for(let books of value)
+				{
+				
+					display=display+`<tr><td>${books.bookId}</td><td>${books.bookName}</td><td>${books.bookDepartment}</td><td>${books.bookStatus}</td></tr>`;
+				
+					
+				}
+			displays.innerHTML=display;
+		});
+	}
+	
+}
+	
+</script>
+
+</body>
+</html>

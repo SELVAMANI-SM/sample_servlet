@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Return Book</title>
+</head>
+<body>
+<form onsubmit="bookReturn()">
+<div>
+<input type="number" id="bookreturn" name="bookreturn" placeHolder="Enter Book Id" required Autofocus>
+<button type="submit">Return Book</button>
+</div>
+
+</form>
+<script>
+function bookReturn()
+{
+	event.preventDefault();
+
+	let bookReturnId=document.querySelector("#bookreturn").value;
+	let memberId=localStorage.getItem("MEMBER_ID");
+	const url="http://localhost:8080/Web_libraryApp/MemberReturnBook?bookReturnId="+bookReturnId+"&memberId="+memberId;
+	fetch(url).then(res=>res.json()).then(res=>{
+		let value =res;
+		alert(value);
+		
+
+	});
+}
+
+</script>
+</body>
+</html>

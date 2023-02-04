@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Date By Dinamalar NewsPaper</title>
+</head>
+<body>
+<form onsubmit="dinamalar()">
+<div>
+<input type="date"id="newsdinamalar"name="newsdinamalar" placeHolder="Enter Date" required Autofocus><span id="invalid"></span>
+<button type="submit">Serach Dinamalar</button>
+</div>
+<div >
+<table border="1" >
+<thead >
+<tr>
+
+
+
+</tr>
+</thead>
+<tbody id="display">
+</tbody>
+</table>
+</div>
+</form>
+<script>
+function dinamalar()
+{
+	event.preventDefault();
+	let dateDinamalar=document.querySelector("#newsdinamalar").value;
+	var count=0;
+	if(dateDinamalar==null||dateDinamalar.trim()=="")
+		{
+		invalid.innerHTML="Invalid";
+		}
+	else
+		{
+		count++;
+		}
+	alert(count);
+	if(count==1)
+		{
+		const url="http://localhost:8080/Web_libraryApp/DateByDinamalar?dateDinamalar="+dateDinamalar;
+		fetch(url).then(res=>res.json()).then(res=>{
+			let value=res;
+		
+				 let displays=document.querySelector("#display");
+				 let display="<th>E-Dinamalar Link</th>";
+				display=display+`<tr><td>${value}</td></tr>`;
+				displays.innerHTML=display;
+			 });
+			
+	
+		}
+	}
+
+</script>
+
+</body>
+</html>

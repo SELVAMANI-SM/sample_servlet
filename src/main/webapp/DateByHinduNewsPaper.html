@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Date By Hindu NewsPaper</title>
+</head>
+<body>
+<form onsubmit="hinduNews()">
+<div>
+<input type="date" id="newshindu" name="newshindu" placeHolder="Enter Date" required Autofocus><span id="invaildhindu"></span>
+<button type="submit">Serach Hindu</button>
+</div>
+<div >
+<table border="1" >
+<thead >
+<tr>
+</tr>
+</thead>
+<tbody id="display">
+</tbody>
+</table>
+</div>
+</form>
+<script>
+function hinduNews()
+{
+	event.preventDefault();
+	let hinduNewsPaper=document.querySelector("#newshindu").value;
+	var count=0;
+	if(hinduNewsPaper==null||hinduNewsPaper.trim()=="")
+		{
+		invaildhindu.innerHTML="Invalid";
+		}
+	else
+		{
+		count++;
+		}
+	if(count==1)
+		{
+		const url="http://localhost:8080/Web_libraryApp/DateByHindu?hinduNewsPaper="+hinduNewsPaper;
+		 fetch(url).then(res=>res.json()).then(res=>{
+			 let value=res;
+				
+			 let displays=document.querySelector("#display");
+			 let display="<th>E-HINDU Link</th>";
+			display=display+`<tr><td>${value}</td></tr>`;
+			displays.innerHTML=display;
+		 });
+		}
+	}
+</script>
+</body>
+</html>

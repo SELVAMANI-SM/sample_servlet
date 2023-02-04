@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>MemberTakeBook</title>
+</head>
+<body>
+<form onsubmit="bookTaken()">
+<div>
+<input type="number" id="booktake" name="booktake" placeHolder="Enter Book Id" autofocus required >
+<button type="submit">Take Book</button>
+</div>
+
+</form>
+<script>
+function bookTaken()
+{
+	event.preventDefault();
+
+	let bookTakeId=document.querySelector("#booktake").value;
+	let memberId=localStorage.getItem("MEMBER_ID");
+	
+	
+	const url="http://localhost:8080/Web_libraryApp/MemberTakeBook?bookTakeId="+bookTakeId+"&memberId="+memberId;
+	fetch(url).then(res=>res.json()).then(res=>{
+		let value =res;
+		alert(value);
+		
+		
+
+	});
+}
+
+</script>
+</body>
+</html>

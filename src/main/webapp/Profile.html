@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Profile</title>
+</head>
+<body>
+<div style="text-align:center">
+User Id <h2 id="userid"></h2>
+Name<h2 id="name"></h2>
+Email<h2 id="email"></h2>
+Number<h2 id="number"></h2>
+</div>
+<script>
+function userDetails(){
+	let sessionId = localStorage.getItem('SESSION_ID');
+	console.log(sessionId);
+	const url = "http://localhost:8080/Web_libraryApp/ProfileServlet?sessionId="+sessionId;
+	fetch(url).then(res=>res.json()).then(res=>{
+		console.log(res);
+		let n = res;
+		let name = n.userName;
+		let email = n.userEmail;
+		let number = n.usermobile;
+		let userid = n.userId;		
+		console.log(userid);
+		console.log(name);
+		console.log(number);
+		console.log(email);
+		document.getElementById("userid").innerHTML = userid;
+		document.getElementById("name").innerHTML = name;
+		document.getElementById("email").innerHTML = email;
+		document.getElementById("number").innerHTML = number;
+	});
+
+	
+}
+userDetails();
+
+</script>
+</body>
+</html>

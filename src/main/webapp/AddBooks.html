@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Add Books</title>
+</head>
+<body>
+<form onsubmit="addbook()">
+<div>
+<input type="number"id="bookid"name="bookid" placeHolder="Enter Book Id" Autofocus required ><span id="invalidid"></span>
+
+</div>
+<div>
+<input type="text"id="bookname"name="bookname"placeHolder="Enter Book Name"required><span id="invalidname"></span>
+
+</div>
+<div>
+<input type="text" id="bookauthor"name="bookauthor"placeHolder="Enter Book Author" required><span id="	invalidauthor"></span>
+</div>
+<div>
+<input type="text" id="bookdept"name="bookdept"placeHolder="Enter Book Department " required><span id="	invaliddept"></span>
+</div>
+<div>
+<input type="text"id="bookstatus"name="bookstatus"placeHolder="Enter Available | Unavailable"required><span id="invalidstatus"></span>
+</div>
+<div>
+<input type="text" id="booklink"name="booklink" placeHolder="Enter E-Book Link " required><span id="invalidLink"></span>
+</div>
+<div>
+<input type="text" id="booktutorial"name="booktutorial" placeHolder="Enter Book Tutorial Link" required><span id="invalidTutorialLink"></span>
+</div>
+<div>
+<input type="text" id="bookimage"name="bookimage" placeHolder="Enter Book Image Link" required><span id="invalidimageLink"></span>
+</div>
+<button type="submit">Submit</button>
+</form>
+<script>
+function addbook()
+{
+	event.preventDefault();
+	let bookId=document.querySelector("#bookid").value;
+	let bookName=document.querySelector("#bookname").value;
+	let bookAuthor=document.querySelector("#bookauthor").value;
+	let bookDept=document.querySelector("#bookdept").value;
+	let bookStatus=document.querySelector("#bookstatus").value;
+	let eBookLink=document.querySelector("#booklink").value;
+	let bookVideoLink=document.querySelector("#booktutorial").value;
+	let bookImageLink=document.querySelector("#bookimage").value;
+	var count=0;
+	if(bookId==null||bookId.trim()=="")
+		{
+		invalidid.innerHTml="Invalid";
+		}
+	else{
+		count++;
+	}
+	if(bookName==null||bookName.trim()=="")
+		{
+		invalidname.innerHTML="Invalid";
+		}
+	else
+		{
+		count++;
+		}
+	if(bookAuthor==null||bookAuthor.trim()=="")
+		{
+		invalidauthor.innerHTMl="Invalid";
+		}
+	else
+		{
+		count++;
+		
+		}
+	if(bookDept==null||bookDept.trim()=="")
+		{
+		invaliddept.innerHTML="Invalid";
+		}
+	else
+		{
+		count++;
+		}
+	if(bookStatus==null||bookStatus.trim()=="")
+		{
+		invalidstatus.innerHTML="Invalid";
+		}
+	else
+		{
+		count++;
+		}
+	if(eBookLink==null||eBookLink.trim()=="")
+			{
+		invalidLink.innerHTML="Invaild";
+	
+			}
+	else
+		{
+		count++;
+		}
+	if(bookVideoLink==null||bookVideoLink.trim()=="")
+		{
+		invalidTutorialLink.innerHTML="Invalid";
+		}
+	else
+		{
+		count++;
+		}
+	if( bookImageLink==null|| bookImageLink.trim()=="")
+	{
+		invalidimageLink.innerHTML="Invalid";
+	}
+else
+	{
+	count++;
+	}
+	alert(count);
+	if(count==8)
+		{
+		const url="http://localhost:8080/Web_libraryApp/AddBook?bookId="+bookId+"&bookName="+bookName+"&bookAuthor="+bookAuthor+"&bookDept="+bookDept+"&bookStatus="+bookStatus+"&eBookLink="+eBookLink+"&bookVideoLink="+bookVideoLink+"&bookImageLink="+bookImageLink;
+		fetch(url).then(res=>res.json()).then(res=>{
+			let value=res;
+			alert(value);
+			
+			
+		//console.log(res);
+		});
+		}
+	}
+</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Search By Book Name</title>
+</head>
+<body>
+<form onsubmit="bookName()">
+<div>
+<input type="text" id="bookname"name="bookname" placeHolder="Enter Book Name" required autofocus><span id="invalidname"></span>
+
+</div>
+<button type="submit" >Search</button>
+<div>
+<table border="1">
+<thead>
+<tr></tr>
+</thead>
+<tbody id="display">
+</tbody>
+</table>
+</div>
+</form>
+<script>
+function bookName()
+{
+	event.preventDefault();
+	let bookName=document.querySelector("#bookname").value;
+	var count=0;
+	if(bookName==null||bookName.trim()=="")
+		{
+		invalidname.innerHTML="Invaild"
+		}
+	else
+		{
+		count++;
+		}
+	if(count==1)
+		{
+		const url="http://localhost:8080/Web_libraryApp/SerachByBookName?bookName="+bookName;
+		fetch(url).then(res=>res.json()).then(res=>{
+			let value=res;
+			
+			let displays=document.querySelector("#display");
+		
+			let display="<th>Books Id</th><th>Books Name</th><th>Books Status</th>";
+			for(let books of value)
+				{
+				
+					display=display+`<tr><td>${books.bookId}</td><td>${books.bookName}</td><td>${books.bookStatus}</td></tr>`;
+				
+					
+				}
+			displays.innerHTML=display;
+		});
+		}
+	}
+</script>
+
+</body>
+</html>

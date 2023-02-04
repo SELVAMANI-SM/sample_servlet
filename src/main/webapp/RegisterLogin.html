@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Register Login</title>
+<link rel="stylesheet" href="NewFile.css">
+</head>
+<body>
+<div class="login-page">
+		<div class="form">
+			<div class="login">
+				<div class="login-header">
+					<p>Please enter your credentials to login.</p>
+				</div>
+			</div>
+			<section>
+				<form onsubmit="registerlogin()">
+					<div id="useremailinput">
+						<label for="useremail"> User Email / User Id</label> <input
+							type="text" id="useremail" name="useremail"
+							placeHolder="Enter Email" required autofocus><span
+							id="wrongemail"></span>
+
+					</div>
+					<div id="userpasswordinput">
+						<label for="userpassword"> User Password</label> <input
+							type="password" id="userpassword" name="userpassword"
+							placeHolder="Enter Password" required><span
+							id="wrongpassword"></span><br>
+						<button type="submit" id="submit" name="submit">Submit</button>
+
+					</div>
+
+				</form>
+				</section>
+		</div>
+	</div>
+	
+<script>
+function registerlogin()
+{ 
+	event.preventDefault();
+	let email=document.querySelector("#useremail").value;
+	let password=document.querySelector("#userpassword").value;
+	const url="http://localhost:9050/user/login?email="+email+"&password="+password;
+	fetch(url).then(res=>res.text()).then(res=>{
+		let value=res;
+		//alert(value);
+		console.log(res);
+		 if(res.includes("First You Register"))
+			{
+			 alert(res);
+		
+			window.location.href="RegisterUser.html";
+			}
+		else if (res.includes("invalid credentials")){
+			alert(res);
+			window.location.href="RegisterLogin.html";
+		}
+		else
+			{
+			//alert(res);
+			alert("Logged In");
+			localStorage.setItem('SESSION_ID',res);
+			window.location.href="NextPage.html";
+			
+			}
+			
+	});
+}
+</script>
+</body>
+</html>

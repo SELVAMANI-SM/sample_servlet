@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>ShowProcess MemberShip</title>
+</head>
+<body>
+<form onsubmit="memberprocess()">
+<button type="submit">Member Process</button>
+<div >
+<table border="1" >
+<thead >
+<tr>
+
+
+
+</tr>
+</thead>
+<tbody id="display">
+</tbody>
+</table>
+</div>
+</form>
+<script>
+function memberprocess()
+{
+	event.preventDefault();
+	const url="http://localhost:8080/Web_libraryApp/MembserShipProcess";
+	 fetch(url).then(res=>res.json()).then(res=>{
+		let value=res;
+		
+		let displays=document.querySelector("#display");
+		//let disp=document.querySelector("#head");
+		let display="<th> Member Id </th><th> Book Id </th><th> Book Taken </th><th> Book Return </th><th> Books Status </th>";
+		for(let member of value)
+			{
+			
+				display=display+`<tr><td>${member.memberId}</td><td>${member.bookId}</td><td>${member.bookTakenDate}</td><td>${member.bookReturnDate}</td><td>${member.bookStatus}</td></tr>`;
+				//alert(display);
+			}
+		displays.innerHTML=display;
+	
+		//disp.innerHTML;
+		
+	});
+	}
+</script>
+</body>
+</html>

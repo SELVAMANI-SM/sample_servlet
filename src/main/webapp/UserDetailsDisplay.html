@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>User Details Display</title>
+</head>
+<body>
+	<form>
+		
+		<div>
+			<table border="1">
+				<thead>
+					<tr>
+					</tr>
+				</thead>
+				<tbody id="display">
+				</tbody>
+			</table>
+		</div>
+	</form>
+
+
+	<script>
+function userdeatils()
+{
+	
+
+	let userDeatil=localStorage.getItem("SESSION_ID");
+	const url="http://localhost:8080/Web_libraryApp/SingleUserProcess?userDeatil="+userDeatil;
+	fetch(url).then(res=>res.json()).then(res=>{
+		let value =res;
+		let displays=document.querySelector("#display");
+		//let disp=document.querySelector("#head");
+		let display="<th> User Id </th><th> Book Id </th><th> Book Taken </th><th> Book Return </th><th> Books Status </th>";
+		for(let user of value)
+			{
+			
+				display=display+`<tr><td>${user.userId}</td><td>${user.bookId}</td><td>${user.bookTakenDate}</td><td>${user.bookReturnDate}</td><td>${user.bookStatus}</td></tr>`;
+				//alert(display);
+			}
+		displays.innerHTML=display;
+
+	});
+}
+userdeatils()
+
+</script>
+</body>
+</html>
